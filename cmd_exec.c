@@ -162,9 +162,9 @@ int check_error_cmd(char *dir, data_shell *datash)
  */
 int cmd_exec(data_shell *datash)
 {
-	pid_t pd;
+	pid_t pid;
 	pid_t wpd;
-	int state;
+	int state =0;
 	int exec;
 	char *dir;
 	(void) wpd;
@@ -179,8 +179,8 @@ int cmd_exec(data_shell *datash)
 			return (1);
 	}
 
-	pd = fork();
-    if (pd == 0)
+	pid = fork();
+    if (pid == 0)
 	{
 		if (exec == 0)
 			dir = _which(datash->args[0], datash->_environ);
@@ -188,7 +188,7 @@ int cmd_exec(data_shell *datash)
 			dir = datash->args[0];
 		execve(dir + exec, datash->args, datash->_environ);
 	}
-	else if (pd < 0)
+	else if (pid < 0)
 	{
 		perror(datash->av[0]);
 		return (1);
@@ -196,7 +196,7 @@ int cmd_exec(data_shell *datash)
 	else
 	{
 		do {
-			wpd = waitpid(pd, &state, WUNTRACED);
+			wpd = waitpid(pid, &state, WUNTRACED);
 		} while (!WIFEXITED(state) && !WIFSIGNALED(state));
 	}
 

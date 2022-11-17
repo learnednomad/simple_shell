@@ -1,0 +1,3 @@
+/Users/dile/Sites/simple_shell/cmake-build-debug/CMakeFiles/simple_shell_master.dir
+/Users/dile/Sites/simple_shell/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/dile/Sites/simple_shell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
